@@ -1,7 +1,7 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
   relationMode = "prisma"
 }
@@ -12,6 +12,15 @@ generator client {
 }
 
 model Post {
+    id        Int      @id @default(autoincrement())
+    name      String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([name])
+}
+
+model Comment {
     id        Int      @id @default(autoincrement())
     name      String
     createdAt DateTime @default(now())
